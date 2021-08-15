@@ -1,0 +1,12 @@
+name: 'home_maintenance'
+description: 'Create Issues for various seasonal home maintenance tasks'
+inputs:
+  repo-nwo:
+    description: 'the owner and name of the repo where issues will be created, e.g. maxbeizer/home_maintenance'
+    required: true
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ secrets.GITHUB_TOKEN }}
+    - ${{ inputs.repo-nwo }}
