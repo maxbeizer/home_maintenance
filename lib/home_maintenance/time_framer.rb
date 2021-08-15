@@ -3,6 +3,7 @@
 class HomeMaintenance
   # Given a task, figure out if it what whether it's in a given time frame
   class TimeFramer
+    # name => [day, month]
     SEASON_START_MAP = {
       spring: [20, 3],
       summer: [20, 6],
