@@ -1,0 +1,87 @@
+Season,Area,Task Type,Task
+Fall,Appliances,Cleaning,Clean AC condensor
+Fall,Appliances,Cleaning,Clean dryer ducts
+Fall,Appliances,Cleaning,Clean refrigerator coils
+Fall,Appliances,Cleaning,Gas Stove grate cleaning
+Fall,Appliances,Cleaning,Hood Vent cleaning
+Fall,Appliances,Weatherize,Cover AC condensor
+Fall,Doors,Inspection / Repair,"Inspect for wear, lubricate moving points"
+Fall,Exterior,Cleaning,Clean downspouts / rain gutters
+Fall,Exterior,Cleaning,Wash exterior windows
+Fall,Exterior,Inspection / Repair,Brick mortar
+Fall,Exterior,Inspection / Repair,Foundation for cracks
+Fall,Exterior,Inspection / Repair,"Inspect / Repair roof (shingles, vents, light from inside) and chimney"
+Fall,Exterior,Inspection / Repair,Inspect / Replace Insulation attic
+Fall,Exterior,Storage,Clean / Store patio furniture
+Fall,HVAC,Inspection / Repair,Furnace / AC inspection
+Fall,Plumbing,Cleaning,Clean clothes washer filter
+Fall,Plumbing,Cleaning,Clean dishwasher screen
+Fall,Plumbing,Cleaning,Clean faucet Aerators
+Fall,Plumbing,Cleaning,Flush Water Heater
+Fall,Plumbing,Weatherize,Turn off exterior water
+Fall,Roof,Inspection / Repair,Inspect for leaks
+Fall,Windows,Inspection / Repair,"Inspect for wear, lubricate moving points"
+Fall,Windows,Storage,Store window screens
+Fall,HVAC,Cleaning,Vacuum duct work
+Fall,Windows,Cleaning,Clean tracks and weep holes
+Fall,Plumbing,Inspection / Repair,Check TPR valve on water heater
+Fall,Doors,Inspection / Repair,Lubricate all locks
+Fall,Doors,Inspection / Repair,Inspect / Repair weatherstripping
+Fall,Windows,Inspection / Repair,Inspect / Repair weatherstripping
+Fall,HVAC,Cleaning,Humidifier
+Fall,Exterior,Inspection / Repair,"Garage - Tighten and lube hinges, clean tracks, inspect chain, balance door, test sensors, battery?"
+Winter,Exterior,Inspection / Repair,Inspect / Replace Insulation attic
+Winter,Roof,Inspection / Repair,"Inspect for leaks, damage, misalignment"
+Winter,Plumbing,Inspection / Repair,Check TPR valve on water heater
+Spring,Appliances,Cleaning,Clean dryer ducts
+Spring,Appliances,Cleaning,Clean refrigerator coils
+Spring,Appliances,Cleaning,Gas Stove grate cleaning
+Spring,Appliances,Cleaning,Hood Vent cleaning
+Spring,Appliances,Cleaning,Oven Cleaning
+Spring,Appliances,Weatherize,Uncover AC condensor
+Spring,Doors,Inspection / Repair,"Inspect for wear, lubricate moving points"
+Spring,Exterior,Cleaning,Chimney / Fireplace flue
+Spring,Exterior,Cleaning,Clean downspouts / rain gutters
+Spring,Exterior,Cleaning,Pressure wash 
+Spring,Exterior,Inspection / Repair,Brick mortar
+Spring,Exterior,Inspection / Repair,Foundation for cracks
+Spring,Exterior,Inspection / Repair,Inspect / repair door weatherstripping
+Spring,Exterior,Inspection / Repair,Inspect / repair window weatherstripping
+Spring,Exterior,Inspection / Repair,Inspect / Replace Insulation attic
+Spring,Foundation,Inspection / Repair,Inspect foundation for leaks / cracks
+Spring,Interior,Cleaning,Clean kitchen walls / cabinets
+Spring,Plumbing,Cleaning,Clean clothes washer filter
+Spring,Plumbing,Cleaning,Clean dishwasher screen
+Spring,Plumbing,Cleaning,Clean faucet Aerators
+Spring,Plumbing,Cleaning,Flush Water Heater
+Spring,Plumbing,Weatherize,Turn on exterior water
+Spring,Roof,Inspection / Repair,Inspect for leaks
+Spring,Walkways,Cleaning,Pressure wash 
+Spring,Walkways,Inspection / Repair,Inspect / Repair cracks
+Spring,Windows,Cleaning,Wash exterior windows
+Spring,Windows,Inspection / Repair,"Inspect for wear, lubricate moving points"
+Spring,Windows,Installation,Install window screens
+Spring,Electrical,Inspection / Repair,GFCI Outlets
+Spring,Windows,Cleaning,Clean tracks and weep holes
+Spring,Plumbing,Inspection / Repair,Check TPR valve on water heater
+Spring,Exterior,Inspection / Repair,Water drainage / grading from downspouts.
+Spring,Doors,Inspection / Repair,Inspect garage door hardware and opener lubrication
+Spring,HVAC,Cleaning,Humidifier
+Spring,Windows,Cleaning,Clean and lube crank out window operators
+Summer,Doors,Weatherize,Caulk & Weatherstripping
+Summer,Exterior,Inspection / Repair,Inspect / Replace Insulation attic
+Summer,Exterior,Weatherize,"Inspect, touch up paint on siding / windows / trim."
+Summer,Interior,Inspection / Repair,"Caulk sinks, showers, toilets, tubs"
+Summer,Interior,Inspection / Repair,Wall paint touch up
+Summer,Interior,Inspection / Repair,Wood trim - touchup
+Summer,Plumbing,Inspection / Repair,Shower Leaks
+Summer,Plumbing,Inspection / Repair,Sinks Leaks
+Summer,Plumbing,Inspection / Repair,Toilet leaks
+Summer,Roof,Inspection / Repair,Inspect for leaks
+Summer,Windows,Weatherize,Caulk & Weatherstripping
+Summer,Interior,Inspection / Repair,"Repair, clean, seal grout"
+Summer,Plumbing,Inspection / Repair,Check TPR valve on water heater
+Summer,HVAC,Cleaning,Sanitize AC drain line.
+Summer,Appliances,Inspection / Repair,Garage door safety inspection
+Summer,Appliances,Inspection / Repair,Garage door lubrication / inspection.
+Summer,Walkways,Inspection / Repair,Fill cracks / seal asphalt 

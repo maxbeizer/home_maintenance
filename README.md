@@ -1,4 +1,4 @@
-# HomeMaintenance
+# home_maintenance
 
 A project to help create automated issues related to home maintenance tasks.
 
