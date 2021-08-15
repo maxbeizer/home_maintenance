@@ -4,6 +4,9 @@ inputs:
   repo-nwo:
     description: 'the owner and name of the repo where issues will be created, e.g. maxbeizer/home_maintenance'
     required: true
+  github-token:
+    description: 'the github_token from the action'
+    required: true
 runs:
   using: 'docker'
   image: 'Dockerfile'
