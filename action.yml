@@ -8,5 +8,5 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - ${{ secrets.GITHUB_TOKEN }}
+    - ${{ inputs.github-token }}
     - ${{ inputs.repo-nwo }}
