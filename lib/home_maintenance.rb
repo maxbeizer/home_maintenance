@@ -25,6 +25,7 @@ class HomeMaintenance
     @path_to_data = config[:path_to_data] || DEFAULT_DATA_PATH
     @time_frame = config[:time_frame] || :seasonal
     @run_date = config[:run_date] || Date.today
+    ensure_required_fields_set!
   end
 
   def call
@@ -53,8 +54,15 @@ class HomeMaintenance
   def build_task_objects
     CSV.read(@path_to_data).each_with_object([]) do |row, acc|
       task = @task_class.new(row).call
+      next unless task
 
       acc << task if all? || time_frame_matches?(task)
     end.compact
   end
+
+  def ensure_required_fields_set!
+    raise Error, 'repo_nwo must be set!' if @issue_client.is_a?(Octokit::Client) && !@repo_nwo
+  end
 end
+
+HomeMaintenance.call(github_token: ARGV[0], repo_nwo: ARGV[1]) if $PROGRAM_NAME == __FILE__
