@@ -37,7 +37,8 @@ class HomeMaintenance
         labels: ['home_maintenance', task.area, task.task_type].join(',')
       )
 
-      task
+      break
+      # task
     end
   end
 
