@@ -11,4 +11,4 @@ RUN bundle install
 
 COPY . .
 
-ENTRYPOINT ["./run.sh"]
+ENTRYPOINT ["/run.sh"]
