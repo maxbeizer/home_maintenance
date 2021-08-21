@@ -2,6 +2,38 @@
 
 A project to help create automated issues related to home maintenance tasks.
 
+This is a GitHub Action that will create issues in a specified repo for various
+seasonal home maintenance tasks. Install the action where you keep track of such
+things and have it run daily. The action will loop through a CSV of various
+tasks and open, for example, springtime tasks on the first day of spring.
+
+## Example configuration
+
+```yaml
+# in .github/workflows/home_maintenance.yml
+on:
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    # Run daily at 0100h
+    - cron:  '0 1 * * *'
+
+jobs:
+  maintenance:
+    runs-on: ubuntu-latest
+    name: create maintenance issues
+    steps:
+      - name: home_maintenance_action
+        uses: maxbeizer/home_maintenance@main
+        with:
+          repo-nwo: 'maxbeizer/my-cool-repo'
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+```
+
+## Credit
+
+The CSV of tasks was originally shared with me by
+[@jjcaine](https://github.com/jjcaine) :sparkling_heart:
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run
