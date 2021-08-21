@@ -20,6 +20,7 @@ class HomeMaintenance
     @issue_client = config[:issue_client] || Octokit::Client.new(access_token: config[:github_token])
     @task_class = config[:task_class] || Task
     @time_framer_class = config[:time_framer_class] || TimeFramer
+    @logger = config[:logger]
 
     @repo_nwo = config[:repo_nwo]
     @path_to_data = config[:path_to_data] || DEFAULT_DATA_PATH
@@ -30,7 +31,7 @@ class HomeMaintenance
 
   def call
     tasks = build_task_objects
-    puts "creating issues #{tasks.length} for: #{@repo_nwo}"
+    log "creating issues #{tasks.length} for: #{@repo_nwo}"
     tasks[0..2].map do |task|
       res = @issue_client.create_issue(
         @repo_nwo,
@@ -39,8 +40,8 @@ class HomeMaintenance
         labels: ['home_maintenance', task.area, task.task_type].join(',')
       )
 
-      puts "result: #{res}"
-      puts "issue created: #{task.task_name}"
+      log "result: #{res}"
+      log "issue created: #{task.task_name}"
       task
     end
   end
@@ -56,7 +57,9 @@ class HomeMaintenance
   end
 
   def build_task_objects
-    CSV.read(@path_to_data).each_with_object([]) do |row, acc|
+    csv = CSV.read(@path_to_data)
+    log "CSV read at #{@path_to_data}: rows #{csv.length}"
+    csv.each_with_object([]) do |row, acc|
       task = @task_class.new(row).call
       next unless task
 
@@ -66,6 +69,12 @@ class HomeMaintenance
 
   def ensure_required_fields_set!
     raise Error, 'repo_nwo must be set!' if @issue_client.is_a?(Octokit::Client) && !@repo_nwo
+  end
+
+  def log(msg)
+    puts "#{Time.now.utc}: #{msg}" unless @logger
+
+    @logger.call(msg)
   end
 end
 
