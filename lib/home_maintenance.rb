@@ -32,7 +32,7 @@ class HomeMaintenance
   def call
     tasks = build_task_objects
     log "creating issues #{tasks.length} for: #{@repo_nwo}"
-    tasks[0..2].map do |task|
+    tasks.map do |task|
       res = @issue_client.create_issue(
         @repo_nwo,
         task.task_name,
@@ -40,7 +40,7 @@ class HomeMaintenance
         labels: ['home_maintenance', task.area, task.task_type].join(',')
       )
 
-      log "result: #{res}"
+      log "result: #{res.inpsect}"
       log "issue created: #{task.task_name}"
       task
     end
@@ -78,4 +78,4 @@ class HomeMaintenance
   end
 end
 
-HomeMaintenance.call(github_token: ARGV[0], repo_nwo: ARGV[1], time_frame: :all) if $PROGRAM_NAME == __FILE__
+HomeMaintenance.call(github_token: ARGV[0], repo_nwo: ARGV[1]) if $PROGRAM_NAME == __FILE__
