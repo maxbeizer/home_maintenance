@@ -40,7 +40,7 @@ class HomeMaintenance
         labels: ['home_maintenance', task.area, task.task_type].join(',')
       )
 
-      log "result: #{res.inpsect}"
+      log "result: #{res&.inpsect}"
       log "issue created: #{task.task_name}"
       task
     end

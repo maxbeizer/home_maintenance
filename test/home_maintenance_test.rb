@@ -8,7 +8,7 @@ class HomeMaintenanceTest < Minitest::Test
   end
 
   def test_it_returns_a_list_of_task_like_objects
-    subject_class.call(time_frame: :all, issue_client: MockIssueClient).each do |res|
+    subject_class.call(time_frame: :all, issue_client: MockIssueClient, logger: noop).each do |res|
       assert_respond_to res, :season
       assert_respond_to res, :area
       assert_respond_to res, :task_type
@@ -18,7 +18,7 @@ class HomeMaintenanceTest < Minitest::Test
 
   # NOTE: this is dependent on the actual data in the CSV
   def test_it_returns_data_as_expected
-    result = subject_class.call(time_frame: :all, issue_client: MockIssueClient).first
+    result = subject_class.call(time_frame: :all, issue_client: MockIssueClient, logger: noop).first
     assert_equal 'Fall', result.season
     assert_equal 'Appliances', result.area
     assert_equal 'Cleaning', result.task_type
@@ -33,5 +33,9 @@ class HomeMaintenanceTest < Minitest::Test
 
   def subject_class
     HomeMaintenance
+  end
+
+  def noop
+    proc { true }
   end
 end
