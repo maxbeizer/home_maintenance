@@ -72,9 +72,9 @@ class HomeMaintenance
   end
 
   def log(msg)
-    puts "#{Time.now.utc}: #{msg}" unless @logger
+    @logger.call(msg) && return if @logger
 
-    @logger.call(msg)
+    puts "#{Time.now.utc}: #{msg}"
   end
 end
 
