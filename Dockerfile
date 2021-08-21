@@ -5,9 +5,10 @@ RUN bundle config --global frozen 1
 RUN bundle config set without 'test'
 
 COPY Gemfile Gemfile.lock ./
-run gem install bundler:2.1.4
+RUN gem install bundler:2.1.4
+RUN bundle version
 RUN bundle install
 
 COPY . .
 
-ENTRYPOINT ["./lib/home_maintenance.rb"]
+ENTRYPOINT ["./run.sh"]
