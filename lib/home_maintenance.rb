@@ -29,7 +29,8 @@ class HomeMaintenance
   end
 
   def call
-    build_task_objects.map do |task|
+    puts "creating issues for: #{@repo_nwo}"
+    build_task_objects[0..2].map do |task|
       @issue_client.create_issue(
         @repo_nwo,
         task.task_name,
@@ -37,8 +38,8 @@ class HomeMaintenance
         labels: ['home_maintenance', task.area, task.task_type].join(',')
       )
 
-      break
-      # task
+      puts "issue created: #{task.task_name}"
+      task
     end
   end
 
