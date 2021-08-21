@@ -29,15 +29,17 @@ class HomeMaintenance
   end
 
   def call
-    puts "creating issues for: #{@repo_nwo}"
-    build_task_objects[0..2].map do |task|
-      @issue_client.create_issue(
+    tasks = build_task_objects
+    puts "creating issues #{tasks.length} for: #{@repo_nwo}"
+    tasks[0..2].map do |task|
+      res = @issue_client.create_issue(
         @repo_nwo,
         task.task_name,
         '**created by https://github.com/maxbeizer/home_maintenance**',
         labels: ['home_maintenance', task.area, task.task_type].join(',')
       )
 
+      puts "result: #{res}"
       puts "issue created: #{task.task_name}"
       task
     end
