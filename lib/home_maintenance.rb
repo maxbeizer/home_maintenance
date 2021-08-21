@@ -78,4 +78,4 @@ class HomeMaintenance
   end
 end
 
-HomeMaintenance.call(github_token: ARGV[0], repo_nwo: ARGV[1]) if $PROGRAM_NAME == __FILE__
+HomeMaintenance.call(github_token: ARGV[0], repo_nwo: ARGV[1], time_frame: :all) if $PROGRAM_NAME == __FILE__
