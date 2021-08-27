@@ -7,9 +7,17 @@ inputs:
   github-token:
     description: 'the github_token from the action'
     required: true
+  path-to-data:
+    description: 'the path to a csv of tasks'
+    required: false
+  time-frame:
+    description: 'seasonal or all tasks should be converted to issues'
+    required: false
 runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
     - ${{ inputs.github-token }}
     - ${{ inputs.repo-nwo }}
+    - ${{ inputs.path-to-data }}
+    - ${{ inputs.time-frame }}
