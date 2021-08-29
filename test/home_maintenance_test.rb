@@ -25,6 +25,30 @@ class HomeMaintenanceTest < Minitest::Test
     assert_equal 'Clean AC condensor', result.task_name
   end
 
+  def test_it_errors_if_octokit_is_there_but_nwo_is_falsey
+    assert_raises HomeMaintenance::InvalidInputError, 'expected octokit + no repo_nwo to raise' do
+      subject_class.call(logger: noop)
+    end
+  end
+
+  def test_it_errors_if_octokit_is_there_but_nwo_is_empty
+    assert_raises HomeMaintenance::InvalidInputError, 'expected octokit + no repo_nwo to raise' do
+      subject_class.call(logger: noop, repo_nwo: '')
+    end
+  end
+
+  def test_it_errors_if_time_frame_is_invalid
+    assert_raises HomeMaintenance::InvalidInputError, 'expected octokit + no repo_nwo to raise' do
+      subject_class.call(time_frame: 'lololol', issue_client: MockIssueClient, logger: noop)
+    end
+  end
+
+  def test_it_errors_if_csv_does_not_exist
+    assert_raises HomeMaintenance::CSVReadError, 'expected raise with bad CSV path' do
+      subject_class.call(logger: noop, path_to_data: 'lol/wut.csv', repo_nwo: 'maxbeizer/home_maintenenace')
+    end
+  end
+
   private
 
   class MockIssueClient

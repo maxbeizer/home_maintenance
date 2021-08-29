@@ -4,12 +4,12 @@ require 'csv'
 require 'octokit'
 
 require_relative './home_maintenance/version'
+require_relative './home_maintenance/errors'
 require_relative './home_maintenance/task'
 require_relative './home_maintenance/time_framer'
 
 # Read data on tasks. Convert them to task objects.
 class HomeMaintenance
-  class Error < StandardError; end
   DEFAULT_DATA_PATH = './data/tasks.csv'
   ACCEPTABLE_TIME_FRAMES = %i[seasonal all].freeze
 
@@ -68,8 +68,19 @@ class HomeMaintenance
   end
 
   def ensure_required_fields_set!
-    raise Error, 'repo_nwo must be set!' if @issue_client.is_a?(Octokit::Client) && !@repo_nwo
-    raise Error, 'time_frame must be either seasonal or all' unless ACCEPTABLE_TIME_FRAMES.include?(@time_frame)
+    raise InvalidInputError, 'repo_nwo must be set!' unless valid_issue_creation_config?
+    raise InvalidInputError, 'time_frame must be either seasonal or all' unless valid_time_frame?
+    raise CSVReadError unless File.exist?(@path_to_data)
+  end
+
+  def valid_issue_creation_config?
+    return true unless @issue_client.is_a?(Octokit::Client)
+
+    @repo_nwo && !@repo_nwo.empty?
+  end
+
+  def valid_time_frame?
+    ACCEPTABLE_TIME_FRAMES.include?(@time_frame)
   end
 
   def log(msg)
@@ -81,7 +92,7 @@ class HomeMaintenance
   def massage_path_to_data(config = {})
     return DEFAULT_DATA_PATH unless config[:path_to_data]
 
-    File.join(ENV['GITHUB_WORKSPACE'], config[:path_to_data])
+    File.join(ENV.fetch('GITHUB_WORKSPACE', ''), config[:path_to_data])
   end
 end
 
