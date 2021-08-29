@@ -22,11 +22,18 @@ jobs:
     runs-on: ubuntu-latest
     name: create maintenance issues
     steps:
+      # Assumes you want to supply your own csv from your destination repo.
+      # Check the tasks.csv file in this repo for required structure.
+      # If you want to use the tasks from this repo, no need to checkout and
+      # omit the path-to-data input below.
+      - name: Checkout
+        uses: actions/checkout@v2
       - name: home_maintenance_action
         uses: maxbeizer/home_maintenance@main
         with:
           repo-nwo: 'maxbeizer/my-cool-repo'
           github-token: ${{ secrets.GITHUB_TOKEN }}
+          path-to-data: 'data/tasks.csv'
 ```
 
 ## Credit

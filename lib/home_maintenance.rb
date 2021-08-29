@@ -4,13 +4,14 @@ require 'csv'
 require 'octokit'
 
 require_relative './home_maintenance/version'
+require_relative './home_maintenance/errors'
 require_relative './home_maintenance/task'
 require_relative './home_maintenance/time_framer'
 
 # Read data on tasks. Convert them to task objects.
 class HomeMaintenance
-  class Error < StandardError; end
   DEFAULT_DATA_PATH = './data/tasks.csv'
+  ACCEPTABLE_TIME_FRAMES = %i[seasonal all].freeze
 
   def self.call(config = {})
     new(**config).call
@@ -23,8 +24,8 @@ class HomeMaintenance
     @logger = config[:logger]
 
     @repo_nwo = config[:repo_nwo]
-    @path_to_data = config[:path_to_data] || DEFAULT_DATA_PATH
-    @time_frame = config[:time_frame] || :seasonal
+    @path_to_data = massage_path_to_data(config)
+    @time_frame = (config[:time_frame] || :seasonal).to_sym
     @run_date = config[:run_date] || Date.today
     ensure_required_fields_set!
   end
@@ -33,14 +34,13 @@ class HomeMaintenance
     tasks = build_task_objects
     log "creating issues #{tasks.length} for: #{@repo_nwo}"
     tasks.map do |task|
-      res = @issue_client.create_issue(
+      @issue_client.create_issue(
         @repo_nwo,
         task.task_name,
         '**created by https://github.com/maxbeizer/home_maintenance**',
         labels: ['home_maintenance', task.area, task.task_type].join(',')
       )
 
-      log "result: #{res&.inpsect}"
       log "issue created: #{task.task_name}"
       task
     end
@@ -68,7 +68,19 @@ class HomeMaintenance
   end
 
   def ensure_required_fields_set!
-    raise Error, 'repo_nwo must be set!' if @issue_client.is_a?(Octokit::Client) && !@repo_nwo
+    raise InvalidInputError, 'repo_nwo must be set!' unless valid_issue_creation_config?
+    raise InvalidInputError, 'time_frame must be either seasonal or all' unless valid_time_frame?
+    raise CSVReadError unless File.exist?(@path_to_data)
+  end
+
+  def valid_issue_creation_config?
+    return true unless @issue_client.is_a?(Octokit::Client)
+
+    @repo_nwo && !@repo_nwo.empty?
+  end
+
+  def valid_time_frame?
+    ACCEPTABLE_TIME_FRAMES.include?(@time_frame)
   end
 
   def log(msg)
@@ -76,6 +88,19 @@ class HomeMaintenance
 
     puts "#{Time.now.utc}: #{msg}"
   end
+
+  def massage_path_to_data(config = {})
+    return DEFAULT_DATA_PATH unless config[:path_to_data]
+
+    File.join(ENV.fetch('GITHUB_WORKSPACE', ''), config[:path_to_data])
+  end
 end
 
-HomeMaintenance.call(github_token: ARGV[0], repo_nwo: ARGV[1]) if $PROGRAM_NAME == __FILE__
+if $PROGRAM_NAME == __FILE__
+  HomeMaintenance.call(
+    github_token: ARGV[0],
+    repo_nwo: ARGV[1],
+    path_to_data: ARGV[2],
+    time_frame: ARGV[3]
+  )
+end
