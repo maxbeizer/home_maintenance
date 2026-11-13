@@ -1,5 +1,8 @@
 # home_maintenance
 
+> [!IMPORTANT]
+> No longer maintained
+
 A project to help create automated issues related to home maintenance tasks.
 
 This is a GitHub Action that will create issues in a specified repo for various
